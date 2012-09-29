@@ -70,8 +70,19 @@ namespace ProjectParser
 						ProjectGuid = new Guid(projGuid),
 						TypeGuid = new Guid(typeGuid)
 					};
-					
+					p.ProjectType = ProjectType.DataObjects;
 					projects.Add(p);
+					
+					Console.WriteLine("Found project: " + p.Name);
+					foreach(CompileItem item in p.CompileItems)
+					{
+						Console.WriteLine("    Compile item: " + item.Path);
+					}
+					Console.WriteLine();
+					
+					string outFile = string.Format("/tmp/{0}.csproj", p.Name);
+			
+					p.Save(outFile);
 				}
 			}
 		}
